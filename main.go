@@ -50,6 +50,10 @@ func handleConnection(conn net.Conn) {
   for {
     n, err := conn.Read(buffer)
     if err != nil {
+      if err == io.EOF {
+        fmt.Println("Connection closed by the sender.")
+        break
+      }
       fmt.Println("Error reading message: ", err)
       break
     }
